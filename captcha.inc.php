@@ -1,7 +1,7 @@
 <?php
 /**
  * A simple PHP Captcha Script
- * [link]
+ * https://github.com/sveneberth/simple-captcha
  *
  * Copyright 2015 Sven Eberth
  * Released under the MIT license, see LICENSE.txt
