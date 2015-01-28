@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require('captcha.inc.php');
+require('simple-captcha.inc.php');
 
 $captcha = new simple_captcha;
 $captcha->positionX = 45;
