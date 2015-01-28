@@ -26,7 +26,7 @@ $captcha->length = 5;
 		?>
 		<form name="myform" action="" method="post">
 			
-			<p>Please type the Capcha to confirm, that you are a human.</p>
+			<p>Please enter the Captcha Code to confirm, that you are a human.</p>
 			
 			<?php
 				echo $captcha->createHTMLImage();
