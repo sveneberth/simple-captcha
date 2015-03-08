@@ -7,17 +7,17 @@
  * Released under the MIT license, see LICENSE.txt
  */
 
-class simple_captcha {
-
-	/* ### DEFAULT SETTINGS ### */
+class simple_captcha
+{
+	### DEFAULT SETTINGS ###
 	public $characters = "ABCDEFGHJKMNQRTUVWXYabdefghjmnqrtvy23456789";
 	public $length = 8;
 	
 	public $background_image = 'images/background.png';
 	
-	public $font = 'font/fradm.ttf';
+	public $fontFamily = 'font/fradm.ttf';
 	public $fontColor = array(255, 255, 255);
-	public $fontsize = 20;
+	public $fontSize = 20;
 
 	public $positionX = 25;
 	public $positionY = 50;
@@ -25,20 +25,27 @@ class simple_captcha {
 	public $positionRange = 5;
 	
 	
-	private function is_session_started() {
-		if(php_sapi_name() !== 'cli') {
-			if(version_compare(phpversion(), '5.4.0', '>=')) {
+	private function is_session_started()
+	{
+		if(php_sapi_name() !== 'cli')
+		{
+			if(version_compare(phpversion(), '5.4.0', '>='))
+			{
 				return session_status() === PHP_SESSION_ACTIVE;
-			} else {
+			}
+			else
+			{
 				return session_id() === '';
 			}
 		}
 		return false;
 	}
 	
-	protected function createCode() {
+	private function createCode()
+	{
 		$code = '';
-		while(strlen($code) < $this->length) { // get random char
+		while(strlen($code) < $this->length) // get a random char
+		{
 			$code .= substr($this->characters, rand() % (strlen($this->characters)), 1);
 		}
 		
@@ -50,7 +57,8 @@ class simple_captcha {
 		return $code;
 	}
 	
-	public function createCaptcha() {
+	public function createCaptcha()
+	{
 		$code = $this->createCode();
 
 		list($red, $green, $blue) = $this->fontColor;
@@ -60,16 +68,17 @@ class simple_captcha {
 		$color = ImageColorAllocate ($image, $red, $green, $blue);
 	
 	
-		for($i = 1; $i <= $this->length; $i++) {
+		for($i = 1; $i <= $this->length; $i++)
+		{
 			ImageTTFText // create letter
 			(
 				$image, // background-image
-				$this->fontsize, // font-size
+				$this->fontSize, // font-size
 				rand(- $this->angleRange, $this->angleRange), // angle
 				$this->positionX * $i + rand(- $this->positionRange, $this->positionRange), // Position-X
 				$this->positionY + rand(- $this->positionRange, $this->positionRange), // Position-Y
 				$color, // font-color
-				$this->font, // font
+				$this->fontFamily, // font
 				$code[$i - 1] // value
 			);
 		}
@@ -85,7 +94,8 @@ class simple_captcha {
 		return 'data:image/png;base64,' . base64_encode($imagedata);
 	}
 	
-	public function createHTMLImage() {
+	public function createHTMLImage()
+	{
 		return '<img src="' . $this->createCaptcha() . '" alt="Captcha Code" />';
 	}
 }

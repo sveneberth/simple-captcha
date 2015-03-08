@@ -1,4 +1,12 @@
 <?php
+/**
+ * A simple PHP Captcha Script
+ * https://github.com/sveneberth/simple-captcha
+ *
+ * Copyright 2015 Sven Eberth
+ * Released under the MIT license, see LICENSE.txt
+ */
+
 session_start();
 
 require('simple-captcha.inc.php');
@@ -16,10 +24,14 @@ $captcha->length = 5;
 	<body>
 		
 		<?php
-			if(isset($_POST['submit'])) {
-				if($_POST['captcha'] == $_SESSION['_CAPTCHA']['code']) {
+			if(isset($_POST['submit']))
+			{
+				if($_POST['captcha'] == $_SESSION['_CAPTCHA']['code'])
+				{
 					echo "<p>The Captcha has been entered correctly!</p>";
-				} else {
+				}
+				else
+				{
 					echo "<p>The Captcha has been entered incorrectly! Please try it again.</p>";
 				}
 			}
@@ -28,9 +40,7 @@ $captcha->length = 5;
 			
 			<p>Please enter the Captcha Code to confirm, that you are a human.</p>
 			
-			<?php
-				echo $captcha->createHTMLImage();
-			?>
+			<?= $captcha->createHTMLImage() ?>
 			<br />
 			
 			<input type="text" name="captcha" placeholder="Captcha" />
