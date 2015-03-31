@@ -16,7 +16,7 @@ $captcha->positionX = 45;
 $captcha->length = 5;
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="de">
 	<head>
 		<meta charset="UTF-8" />
 		<title>Simple Captcha - Example</title>
